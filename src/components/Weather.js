@@ -27,9 +27,9 @@ const [weatherData, setWeatherData] = useState([]);
 
   const WeatherBox = ({ data }) => (
     <div classNameName="text-center">
-      <div classNameName="card"   style={{"width" : "5rem"}}>
-      <img className="card-img-top p-2 mx-auto" src="https://www.clipartmax.com/png/middle/45-459357_icono-clima.png" style={{float : 'left', paddingRight : '10px'}} alt="Title"/>
-          <h2>{data.name}</h2>
+      <div classNameName="card"   style={{"width" : "3rem"}}>
+      <img className="card-img-top p-2 mx-auto" font-size={"2rem"} src="https://i0.wp.com/climaya.com/wp-content/uploads/2019/06/cy-logo-512-512.png?fit=512%2C512&ssl=1" style={{float : 'left', paddingRight : '9px'}} alt="Title"/>
+        <h2>{data.name}</h2>
           <p>{data.weather[0].description}</p>
           <p>{data.main.temp} °C</p>
           <br></br>
@@ -42,6 +42,23 @@ const [weatherData, setWeatherData] = useState([]);
 
 
 
+
+  const login = ()=>{
+    signInAnonymously(getAuth()).then(usuario=> console.log
+      (usuario));
+  }
+
+
+
+  const activarMensajes = async ()=>{
+    const token = await getToken(messaging, {
+      vapidKey:"BL0wh9zllWdc0a3zxEWZyj4YHo9LIfC-ZH7vf040tKoZqMGFy_OJinfx9pAxzkllyDYB0e7qwgBl9z2Sjvoh0x4"
+    }).catch(error => console.log("error al generar el token paps"));
+
+    if(token) console.log("Este es tu token: "+ token);
+    if(!token) console.log("No tienes token paps")
+  }
+  
 
   React.useEffect(()=>{
     onMessage(messaging, message=>{
@@ -66,11 +83,13 @@ const [weatherData, setWeatherData] = useState([]);
           </head>
           <body>
               <nav className="text-center bg-dark">
-                  <a className="navbar-brand" href="#">El ClimaClima</a>
+                  <a className="navbar-brand" href="#">App de Clima</a>
                   <button className="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
                       aria-expanded="false" aria-label="Toggle navigation"></button>
                   <div className="text-center" id="collapsibleNavId">
-                      <form className="col-md-2 col-xs-6">
+                      <form className="d-flex my-2 my-lg-0">
+                          <button onClick={login} className="btn btn-outline-light my-2 my-sm-0 m-2" type="submit">Ingresar</button>
+                          <button onClick={activarMensajes} className="btn btn-outline-light my-2 my-sm-0" type="submit">Generar</button>
                           <ButtonP/>
                       </form>
                   </div>
@@ -87,11 +106,11 @@ const [weatherData, setWeatherData] = useState([]);
                           <div className="text-center">
                           <div className="card" style={{"width" : "18rem"}}>
                                   <img className="card-img-top p-2 mx-auto" src="https://i0.wp.com/climaya.com/wp-content/uploads/2019/06/cy-logo-512-512.png?fit=512%2C512&ssl=1" style={{float : 'left', paddingRight : '10px'}} alt="Title"/>
-                                
+                              
                               </div>
                               <br/>
                               
-                              <button onClick={getWeatherData} type="button" class="btn btn-primary d-block mx-auto">Obtener clima</button>
+                              <button onClick={getWeatherData} type="button" class="btn btn-primary d-block mx-auto">Get weather data</button>
                               {weatherBoxes}
                             
                           </div>
@@ -106,6 +125,10 @@ const [weatherData, setWeatherData] = useState([]);
 
 
 
+function isPushNotificationSupported() {
+  return "serviceWorker" in navigator && "PushManager" in window;
+}
 
+isPushNotificationSupported()
 
 export default App;
