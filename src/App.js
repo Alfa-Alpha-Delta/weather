@@ -83,12 +83,9 @@ const [weatherData, setWeatherData] = useState([]);
                                   <div className="row">
                                   </div>
                               </div>
-                          </div>
-                          <div className="text-center">
-                          <div className="card" style={{"width" : "18rem"}}>
-                                  <img className="card-img-top p-2 mx-auto" src="https://i0.wp.com/climaya.com/wp-content/uploads/2019/06/cy-logo-512-512.png?fit=512%2C512&ssl=1" style={{float : 'left', paddingRight : '10px'}} alt="Title"/>
-                                
-                              </div>
+                          
+                          
+                              
                               <br/>
                               
                               <button onClick={getWeatherData} type="button" class="btn btn-primary d-block mx-auto">Obtener clima</button>
